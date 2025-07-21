@@ -2,7 +2,11 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const NodeRSA = require('node-rsa');
 const fs = require('fs');
-
+if (!fs.existsSync('public.key')) {
+    console.error(chalk.red('Error: public.key file not found!'));
+    console.error(chalk.red('Please run `node generate-key.js` to create the key file.'));
+    process.exit(1);
+}
 (async () => {
     const answers = await inquirer.prompt([
         {
